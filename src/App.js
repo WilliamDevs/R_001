@@ -6,7 +6,7 @@ import WeatherCard from "./components/WeatherCard/WeatherCard";
 function App() {
   const data = async () => {
     const apiRes = await fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=48ee2728a5c8d1781a1ea9984f428b0e"
+      "https://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=YourAPI"
     );
     const restJSON = await apiRes.json();
     return restJSON;
