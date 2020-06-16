@@ -8,11 +8,14 @@ const Location = (props) => {
   const City = styled.h1`
     font-size: 1.6em;
   `;
+  const Country = styled.h3`
+    font-size: 0.6em;
+  `;
 
   return (
     <Container>
-      <City className="city">Missouri</City>
-      <h3 className="country">North America</h3>
+      <City>{props.city}</City>
+      <Country>{props.country}</Country>
     </Container>
   );
 };

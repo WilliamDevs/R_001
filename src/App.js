@@ -1,23 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import "./App.css";
 import WeatherCard from "./components/WeatherCard/WeatherCard";
 
 function App() {
-  const data = async () => {
+  const [query, setQuery] = useState("Sydney, au");
+  const [city, setCity] = useState("");
+  const [temp, setTemp] = useState("");
+  const [condition, setCondition] = useState("");
+  const [country, setCountry] = useState("");
+  const data = async (query) => {
     const apiRes = await fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=48ee2728a5c8d1781a1ea9984f428b0e"
+      `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=48ee2728a5c8d1781a1ea9984f428b0e`
     );
     const restJSON = await apiRes.json();
     return restJSON;
   };
-  console.log(data());
-  data().then((res) => console.log(res));
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log(data());
+    data(query).then((res) => {
+      console.log(res.main.temp);
+      setTemp(res.main.temp);
+      setCondition(res.weather[0].main);
+      setCountry(res.sys.country);
+      setCity(res.name);
+    });
+  };
+  useEffect(() => {
+    data(query).then((res) => {
+      console.log(res.main.temp);
+      setTemp(res.main.temp);
+      setCondition(res.weather[0].main);
+      setCountry(res.sys.country);
+      setCity(res.name);
+    });
+  }, []);
   return (
     <div className="App">
-      <WeatherCard temp={30} condition="Clear" />
-      <WeatherCard temp={13} condition="Rain" />
-      <WeatherCard temp={-10} />
+      <WeatherCard
+        temp={temp}
+        condition={condition}
+        city={city}
+        country={country}
+      />
+      {/* <WeatherCard temp={13} condition="Rain" />
+      <WeatherCard temp={-10} /> */}
+      <form>
+        <input value={query} onChange={(e) => setQuery(e.target.value)} />
+        <button onClick={(e) => handleSearch(e)}>Search</button>
+      </form>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 
 import Location from "./Location";
 import Icon from "./Icon";
+import Condition from "./Condition";
 
 const WeatherCard = (props) => {
   let highColor = 0;
@@ -38,10 +39,9 @@ const WeatherCard = (props) => {
   `;
   return (
     <Card>
-      <Location />
+      <Location city={props.city} country={props.country} />
       <Icon condition={props.condition} />
-      <h1 className="temp">20 C</h1>
-      <h3 className="condition">Sunny</h3>
+      <Condition temp={props.temp} condition={props.condition} />
     </Card>
   );
 };
