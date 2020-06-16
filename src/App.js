@@ -11,11 +11,7 @@ function App() {
   const [country, setCountry] = useState("");
   const data = async (query) => {
     const apiRes = await fetch(
-<<<<<<< HEAD
-      `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=48ee2728a5c8d1781a1ea9984f428b0e`
-=======
       "https://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=YourAPI"
->>>>>>> 69945863a69dcc5c81a572c709cae38c17ea494d
     );
     const restJSON = await apiRes.json();
     return restJSON;
